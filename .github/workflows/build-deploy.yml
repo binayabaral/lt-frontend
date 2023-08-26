@@ -51,13 +51,14 @@ jobs:
       - name: Deploy web app
         if: github.event.pull_request.merged
         run: |
-          echo "Bucket name: ${{ vars.STATIC_FILE_STORAGE_BUCKET_NAME }}"
+          echo "Bucket name: $STATIC_FILE_STORAGE_BUCKET_NAME"
           cd ${{ github.workspace }}/build
-          aws s3 sync . ${{ vars.STATIC_FILE_STORAGE_BUCKET_NAME }} --delete
+          aws s3 sync . $STATIC_FILE_STORAGE_BUCKET_NAME --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          STATIC_FILE_STORAGE_BUCKET_NAME: ${{ vars.STATIC_FILE_STORAGE_BUCKET_NAME }}
 
       - name: Create cloudfront Invalidation
         if: github.event.pull_request.merged
