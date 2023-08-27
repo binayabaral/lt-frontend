@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/binayabaral/lt-frontend/compare/v1.0.0...v1.0.1) (2023-08-27)
+
+
+### :repeat: CI
+
+* fix release ([3fa6297](https://github.com/binayabaral/lt-frontend/commit/3fa6297f7979116b86d0223fa507042425e0bd1a))
+
 ## 1.0.0 (2023-08-27)
 
 
