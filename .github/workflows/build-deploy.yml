@@ -60,12 +60,6 @@ jobs:
         env:
           REACT_APP_BASE_URL: ${{ vars.REACT_APP_BASE_URL }}
 
-      - name: Create a release
-        if: github.event.pull_request.merged && (contains(github.base_ref, 'main'))
-        run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Deploy web app
         if: github.event.pull_request.merged || github.event_name == 'workflow_dispatch'
         run: |
