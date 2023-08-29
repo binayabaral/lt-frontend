@@ -7,6 +7,7 @@ interface AddUserFormProps {
 const AddUserForm = (props: AddUserFormProps) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [previewSource, setPreviewSource] = useState<string | ArrayBuffer | null>(null);
 
@@ -30,13 +31,14 @@ const AddUserForm = (props: AddUserFormProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name || !email || !previewSource) {
+    if (!name || !email || !previewSource || !phoneNumber) {
       return;
     }
 
     const formData = {
       name,
       email,
+      phoneNumber,
       fileString: previewSource
     };
 
@@ -50,6 +52,7 @@ const AddUserForm = (props: AddUserFormProps) => {
       setIsSubmitting(false);
       setName('');
       setEmail('');
+      setPhoneNumber('');
       setPreviewSource(null);
       props.setShouldFetchUsers(true);
     } catch (error) {
@@ -84,6 +87,17 @@ const AddUserForm = (props: AddUserFormProps) => {
           placeholder='Enter email'
           value={email}
           onChange={e => setEmail(e.target.value)}
+        />
+      </div>
+      <div className='form-group'>
+        <label htmlFor='phone_number'>Phone Number</label>
+        <input
+          type='text'
+          className='form-control'
+          id='phone_number'
+          placeholder='Enter phone number'
+          value={phoneNumber}
+          onChange={e => setPhoneNumber(e.target.value)}
         />
       </div>
       <div className='form-group'>
