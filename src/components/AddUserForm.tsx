@@ -8,6 +8,7 @@ const AddUserForm = (props: AddUserFormProps) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [previewSource, setPreviewSource] = useState<string | ArrayBuffer | null>(null);
 
@@ -31,7 +32,7 @@ const AddUserForm = (props: AddUserFormProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name || !email || !previewSource || !phoneNumber) {
+    if (!name || !email || !previewSource || !phoneNumber || !address) {
       return;
     }
 
@@ -39,6 +40,7 @@ const AddUserForm = (props: AddUserFormProps) => {
       name,
       email,
       phoneNumber,
+      address,
       fileString: previewSource
     };
 
@@ -53,6 +55,7 @@ const AddUserForm = (props: AddUserFormProps) => {
       setName('');
       setEmail('');
       setPhoneNumber('');
+      setAddress('');
       setPreviewSource(null);
       props.setShouldFetchUsers(true);
     } catch (error) {
@@ -98,6 +101,17 @@ const AddUserForm = (props: AddUserFormProps) => {
           placeholder='Enter phone number'
           value={phoneNumber}
           onChange={e => setPhoneNumber(e.target.value)}
+        />
+      </div>
+      <div className='form-group'>
+        <label htmlFor='address'>Address</label>
+        <input
+          type='text'
+          className='form-control'
+          id='address'
+          placeholder='Enter address'
+          value={address}
+          onChange={e => setAddress(e.target.value)}
         />
       </div>
       <div className='form-group'>
